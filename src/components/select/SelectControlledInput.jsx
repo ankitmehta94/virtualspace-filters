@@ -1,6 +1,6 @@
 const defaultPlaceholderOptionElement = (<option selected={true}></option>) 
 
-export default function Select({optionsArray = [], value, onChange, disabled, placeholderOptionElement = null}) {
+export default function Select({optionsArray = [], value, onChange, disabled, placeholderOptionElement = null, defaultValue}) {
     const optionElementArray = optionsArray.map((opt,i) => {
         let selected = false;
         if(value === opt.value){
@@ -10,6 +10,7 @@ export default function Select({optionsArray = [], value, onChange, disabled, pl
     })
     return (
         <select
+        defaultValue={defaultValue}
         className={''}
         value={value}
         onChange={e => onChange(e.target.value)} 

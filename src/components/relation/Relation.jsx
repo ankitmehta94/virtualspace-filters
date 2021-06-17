@@ -1,4 +1,3 @@
-import { useState } from "react";
 import Select from "../select/SelectControlledInput";
 
 
@@ -8,6 +7,7 @@ export default function Relation({optionsArray = [], value, setRelation, disable
         return (
             <Select
             // className={''}
+            defaultValue={value}
             value={value}
             onChange={setRelation} 
             optionsArray={optionsArray}
