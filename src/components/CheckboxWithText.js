@@ -14,7 +14,6 @@ export const CheckboxWithText = memo(function CheckboxWithText(props) {
 
   return (
     <label className={styles.CheckItem}>
-      {props.text}
       <input
         checked={props.isChecked}
         name={props.text}
@@ -22,6 +21,7 @@ export const CheckboxWithText = memo(function CheckboxWithText(props) {
         type='checkbox'
       />
       <span className={styles.Checkmark} />
+      {props.text}
     </label>
   )
 })

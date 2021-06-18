@@ -1,5 +1,5 @@
 import Select from '../select/SelectControlledInput';
-
+import DropdownControlledInput from "../dropdown/DropdownControlledInput";
 
 
 
@@ -23,7 +23,11 @@ export default function Options({value, setOption, optionsArray, inputType, visi
         // placeholderOptionElement={true}
       />)
     }else if(inputType === 'checkbox'){
-        return ('CheckBox')
+        return <DropdownControlledInput
+        defaultValue={value}
+        value={value}
+        onChange={setOption}
+        optionsArray={optionsArray} />
     }
     return null;
 }

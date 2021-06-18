@@ -1,12 +1,16 @@
 import { useState } from "react";
 import filterValues from "../../const/filterValues.json";
-import Select from "../select/SelectControlledInput";
+import InputWithDataList from "../text_input/InputWithDataList";
 
 
 export default function Category({optionsArray = [], value, setCategory, disabled}) {
 
+
+
+    
     return (
-        <Select
+        <InputWithDataList
+        disabled={disabled}
         value={value}
         onChange={setCategory} 
         placeholderOptionElement={true}

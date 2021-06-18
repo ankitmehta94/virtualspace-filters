@@ -1,0 +1,52 @@
+.optionsContainer{
+    padding: 5px;
+    position: absolute;
+    /* margin: -1px 0 0; */
+    box-sizing: border-box;
+    border: 1px solid #dcdee2;
+    border-radius: 7px;
+    z-index: 1010;
+    background-color: #fff;
+    transform-origin: center top;
+    transition: transform .2s,opacity .2s;
+    opacity: 0;
+    display: flex;
+    display: -webkit-flex;
+    /* width: 200px; */
+}
+.openOptContainer{
+    display: block;
+    opacity: 1;
+    transform: translate(-25%, 5px);
+}
+.multiSelectContainer{
+    min-height: 20px;
+    min-width: 50px;
+    display: inline-block;
+    text-align: center;
+}
+.searchInput{
+    min-width: 0;
+}
+.optList{
+    display: flex;
+    flex-shrink: 0;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: flex-start;
+}
+.optionDiv{
+    padding: 3px;
+    min-height: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.updateButton{
+    border-radius: 5px;
+    background-color: #fed2a8;
+    text-align: center;
+    border: 1px solid #fed2a8;
+    width: 100%;
+}

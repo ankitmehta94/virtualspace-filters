@@ -1,0 +1,26 @@
+.filterPill>button{
+    border:none;
+    background-color: transparent;
+}
+.filterPill{
+    border-radius: 3px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    padding: 9px 0px 8px 0px;
+    font-family: 'Source Sans Pro', sans-serif;
+    font-size: 16pt;
+    /* font-style: regular; */
+    background-color: #ffecdc;
+    margin-right: 12px;
+}
+.filterPill> button > span{
+    font-weight: bold;
+}
+.closeButton{
+    padding: 0px 10px 0px 10px;
+}
+.textButton{
+    padding: 0px 0px 0px 12px;
+}

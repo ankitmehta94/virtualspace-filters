@@ -1,7 +1,9 @@
 import { Fragment, useEffect, useState } from "react";
-import Relation from "./relation/Relation";
-import Options from "./options/Options";
-import Category from "./category/Category";
+import Relation from "../relation/Relation";
+import Options from "../options/Options";
+import Category from "../category/Category";
+// style
+import style from "./Filter.module.css";
 // const
 import filterValues from "const/filterValues";
 import {
@@ -13,10 +15,9 @@ import {
 // custom hook
 import useHideOnClickOutside from "hook/useHideOnClickOutside";
 const CATEGORY_INDEX = KEY_OBJECT[CATEGORY_KEY].index;
-const filterKeys = Object.keys(filterValues).map((key, index) => ({
-  value: key,
-  name: key,
-}));
+const RELATION_INDEX = KEY_OBJECT[RELATION_KEY].index;
+const OPTION_INDEX = KEY_OBJECT[OPTION_KEY].index;
+const filterKeys = Object.keys(filterValues);
 const Relation_Array = [
   { name: "is", value: "is" },
   { name: "is not", value: "is not" },
@@ -31,14 +32,18 @@ export default function Filter({
 }) {
   const [isOnEdit, setIsOnEdit, ref] = useHideOnClickOutside(isAddOn);
   const [tempFilter, setTempFilter] = useState(filter);
-  const [elementsVisibility, setElementsVisibility] = useState(
-    filter[CATEGORY_INDEX] === "" ? false : true
-  );
+  console.log(filter[CATEGORY_INDEX])
+  const defaultVisibility = filter[CATEGORY_INDEX] !== "" ;
+  console.log(defaultVisibility,'<-----------------defaultVisibility')
+  const [elementsVisibility, setElementsVisibility] = useState(defaultVisibility);
   const setTempFilterValue = (key, value) => {
     filter[KEY_OBJECT[key].index] = value;
     const newArray = filter.slice();
     setTempFilter(newArray);
   };
+  useEffect(() => {
+    setTempFilter(filter)
+  },[filter])
   const removeFilter = () => {
     if (isAddOn) {
       setIsAddOn(false);
@@ -52,11 +57,16 @@ export default function Filter({
     }
   }, [isOnEdit]);
   useEffect(() => {
-    if (!elementsVisibility) {
+    const emptyCategory = tempFilter[CATEGORY_INDEX] === ''
+    if (!elementsVisibility && !emptyCategory) {
       setElementsVisibility(true);
+      setOption('');
+    }else if(emptyCategory){
+      setOption(''); 
     }
-    setOption('');
+
   }, [tempFilter[CATEGORY_INDEX]]);
+  const { categoryType, options } = filterValues[filter[CATEGORY_INDEX]] || {};
   useEffect(() => {
     if (elementsVisibility) {
       setRelation(Relation_Array[0].value);
@@ -75,8 +85,9 @@ export default function Filter({
   const setCategory = (value) => setTempFilterValue(CATEGORY_KEY, value);
   const setRelation = (value) => setTempFilterValue(RELATION_KEY, value);
   const setOption = (value) => setTempFilterValue(OPTION_KEY, value);
-  const { categoryType, options } = filterValues[filter[CATEGORY_INDEX]] || {};
-  const disableAddButton = false; //filter[KEY_OBJECT[OPTION_KEY].index] === "";
+
+  const disableAddButton = tempFilter[OPTION_INDEX] === "";
+  console.log(elementsVisibility,'<-----------------elementsVisibility')
   if (isOnEdit) {
     return (
       <div ref={ref}>
@@ -134,12 +145,15 @@ function AddButton({ visible, addFilter, disabled }) {
 }
 function FilterPill({ filter, removeFilter, setIsOnEdit }) {
   if (filter.join("") === "") {
-    return <div></div>;
+    return null;
   }
   return (
-    <Fragment>
-      <button onClick={() => setIsOnEdit(true)}>{filter.join(" ")}</button>
-      <button onClick={removeFilter}>✕</button>
-    </Fragment>
+    <div className={style['filterPill']}>
+      <button  className={style['textButton']} onClick={() => setIsOnEdit(true)}>{
+      `${filter[CATEGORY_INDEX]} ${filter[RELATION_INDEX]} `}
+        <span>{filter[OPTION_INDEX]}</span>
+      </button>
+      <button className={style['closeButton']} onClick={removeFilter}>✕</button>
+    </div >
   );
 }

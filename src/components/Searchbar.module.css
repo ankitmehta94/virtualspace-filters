@@ -6,5 +6,12 @@
   display: flex;
   flex-wrap: wrap;
   margin: 10px;
-  padding: 9px 18px;
+  padding: 8px 18px;
+}
+.Searchbar > button {
+  border-radius: 0px;
+}
+.searchAddText{
+  padding: 0px 3px;
+  color: #979797;
 }
